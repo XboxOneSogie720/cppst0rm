@@ -275,6 +275,7 @@ int dependencies() {
 
     cout << "Installing python3 dependencies...\n";
     system("pip3 install requests");
+    system("pip3 install remotezip");
     cout << "Python dependencies ready!\n";
 
     cout << "{!} Running chmod just in case...\n";
