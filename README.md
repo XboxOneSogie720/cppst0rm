@@ -1,5 +1,5 @@
 # cppst0rm
-A more automated and mainstream version of Mineek's Sunst0rm (https://github.com/mineek/sunst0rm)
+A more automated and mainstream version of [Mineek's Sunst0rm](https://github.com/mineek/sunst0rm)
 
 ## Note to all users who encounter any issues: DO NOT open any issues in futurerestore. Whether that be on Discord, or GitHub, this program does not use futurerestore incorrectly, and issues with futurerestore are unlikely. Instead, get support in [cppst0rm's Discord server](https://discord.gg/gUwb4Apw).
 
@@ -13,7 +13,7 @@ A more automated and mainstream version of Mineek's Sunst0rm (https://github.com
 
 ## Requirements
 - An INTEL mac, M1 Macs are NOT supported yet.
-- A compatible iPhone
+- [A checkm8 vulnurable iDevice](https://www.quora.com/What-iOS-devices-can-Checkra1n-based-on-Checkm8-exploit-jailbreak)
 - Basic knowledge of the mac terminal
 
 ## Build cppst0rm
