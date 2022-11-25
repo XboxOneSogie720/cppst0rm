@@ -772,7 +772,7 @@ int boot(string ipsw, string blob, bool rb, string boardUpper, string identifier
 }
 
 int main(int argc, char **argv) {
-    if(argc < 4) {
+    if(argc < 8) {
         cout << "\n{!} Error: Not enough arguments\n\n";
         usage();
         return 0;
