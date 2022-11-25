@@ -772,7 +772,7 @@ int boot(string ipsw, string blob, bool rb, string boardUpper, string identifier
 }
 
 int main(int argc, char **argv) {
-    if(argc < 8) {
+    if(argc < 4) {
         cout << "\n{!} Error: Not enough arguments\n\n";
         usage();
         return 0;
@@ -780,88 +780,75 @@ int main(int argc, char **argv) {
 
     //Defines the location of the paths and stuff
 
+    //IPSW
     int ipswposs = 0;
-    int blobposs = 0;
-    string mode = "";
-    bool rb = false;
-    int boardposs = 0;
-    bool id = false;
-    int idposs = 0;
-    bool kpp = false;
-    bool legacy = false;
-    bool skipbb = false;
-    
-    //ipsw
-    for(int i = 0; i < argc;) {
-        ++i;
-        if(strcmp(argv[i], "-i")) {
-            ipswposs = i;
+    for(int i = 0; i < argc; i++) {
+        if(!strcmp(argv[i], "-i")) {
+            ipswposs = i+1;
             break;
         }
     }
 
-    //blob
-    for(int i = ipswposs; i < argc;) {
-        ++i;
-        if(strcmp(argv[i], "-t")) {
-            blobposs = i;
+    //BLOB
+    int blobposs = 0;
+    for(int i = 0; i < argc; i++) {
+        if(!strcmp(argv[i], "-t")) {
+            blobposs = i+1;
             break;
         }
     }
+
 
     //Restore or Boot
-    for(int i = blobposs; i < argc;) {
-        ++i;
+    string mode = "";
+    for(int i = 0; i < argc; i++) {
         if(!strcmp(argv[i], "-r")) {
             mode = "RESTORE";
             break;
-        } else if(!strcmp(argv[i], "-b")) {
+        }
+        if(!strcmp(argv[i], "-b")) {
             mode = "BOOT";
             break;
-        } else {
-            cout << "\n{!} Error: Invalid mode: '" << argv[i] << "'\nAre your arguments in order?\n";
-            return 0;
         }
     }
 
-    //Check to remove the boot folder or not
-    for(int i = blobposs; i < argc; ++i) {
-        if(!strcmp(argv[i], "-rb") && mode == "BOOT") {
+    //Remove Boot
+    bool rb = false;
+    for(int i = 0; i < argc; i++) {
+        if(!strcmp(argv[i], "-rb")) {
             rb = true;
             break;
         }
-        if(!strcmp(argv[i], "-rb") && mode == "RESTORE") {
-            cout << "\n{!} Error: You cannot remove your boot folder while restoring. Please remove '-rb' from your arguments while restoring.\n";
-            return 0;
-        }
     }
 
-    //Board config
-    for(int i = blobposs; i < argc; ++i) {
+    //Board position
+    int boardposs;
+    for(int i = 0; i < argc; i++) {
         if(!strcmp(argv[i], "-d")) {
-            boardposs = i + 1;
+            boardposs = i+1;
             break;
         }
     }
 
     //Identifier
+    int idposs = 0;
     if(mode == "BOOT") {
-        for(int i = boardposs; i < argc;) {
-            ++i;
+        for(int i = 0; i < argc; i++) {
             if(!strcmp(argv[i], "-id")) {
-                id = true;
-                idposs = i + 1;
+                idposs = i+1;
                 break;
-            }
-            if(i == (argc-1) && !id) {
-                cout << "\n{!} Error: In order to boot your device, you must specify an identifier\n";
-                return 0;
             }
         }
     }
+    if(mode == "BOOT" && idposs < 1) {
+        cout << "\n{!} Error: You must specify an identifier with '-id' to boot.\n";
+        return 0;
+    }
 
-    //Kpp
-    for(int i = boardposs; i < argc; ++i) {
+   //KPP
+    bool kpp = false;
+
+    for(int i = 0; i < argc; i++) {
         if(!strcmp(argv[i], "--kpp")) {
             kpp = true;
             break;
@@ -869,31 +856,31 @@ int main(int argc, char **argv) {
     }
 
     //Legacy
-    for(int i = boardposs; i < argc; ++i) {
+    bool legacy = false;
+
+    for(int i = 0; i < argc; i++) {
         if(!strcmp(argv[i], "--legacy")) {
             legacy = true;
             break;
         }
     }
 
-    //Skip baseband
-    for(int i = boardposs; i < argc; ++i) {
+    //Skip Baseband
+    bool skipbb = false;
+
+    for(int i = 0; i < argc; i++) {
         if(!strcmp(argv[i], "--skip-baseband")) {
             skipbb = true;
             break;
         }
     }
 
-    cout << "\n\nOVERVIEW:\n";
-    cout << "IPSW: " << argv[ipswposs] << "\n";
-    cout << "BLOB: " << argv[blobposs] << "\n";
-    cout << "MODE: " << mode << "\n";
-    cout << "BOARD: " << argv[boardposs] << "\n";
-    if(rb) {
-        cout << "REMOVE BOOT FOLDER: YES\n";
-    }
-    if(idposs > 1 && mode == "BOOT") {
-        cout << "IDENTIFIER: " << argv[idposs] << "\n";
+    cout << "IPSW: " << argv[ipswposs] << endl;
+    cout << "BLOB: " << argv[blobposs] << endl;
+    cout << "MODE: " << mode << endl;
+    cout << "BOARD: " << argv[boardposs] << endl;
+    if(idposs > 0) {
+        cout << "IDENTIFIER: " << argv[idposs] << endl;
     }
     if(kpp) {
         cout << "KPP: YES\n";
@@ -902,7 +889,10 @@ int main(int argc, char **argv) {
         cout << "LEGACY: YES\n";
     }
     if(skipbb) {
-        cout << "SKIP-BASEBAND: YES\n";
+        cout << "SKIP BASEBAND: YES\n";
+    }
+    if(rb) {
+        cout << "REMOVE BOOT FOLDER: YES\n";
     }
 
     string looksgood;
