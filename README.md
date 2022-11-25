@@ -1,7 +1,7 @@
 # cppst0rm
 A more automated and mainstream version of [Mineek's Sunst0rm](https://github.com/mineek/sunst0rm)
 
-## Note to all users who encounter any issues: DO NOT open any issues in futurerestore. Whether that be on Discord, or GitHub, this program does not use futurerestore incorrectly, and issues with futurerestore are unlikely. Instead, get support in [cppst0rm's Discord server](https://discord.gg/gUwb4Apw).
+## Note to all users who encounter any issues: DO NOT open any issues in futurerestore. Whether that be on Discord, or GitHub, this program does not use futurerestore incorrectly, and issues with futurerestore are unlikely. Instead, get support in [cppst0rm's Discord server](https://discord.gg/5hh8qEqu6J).
 
 ## Since this program is so automated, I felt not the need of a guide, but if any help is needed, please refer to cppst0rm's Discord server for further help if the usage guide doesn't make sense to you.
 
