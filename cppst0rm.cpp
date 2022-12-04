@@ -875,7 +875,7 @@ int main(int argc, char **argv) {
         }
     }
 
-    cout << "IPSW: " << argv[ipswposs] << endl;
+    cout << "\nIPSW: " << argv[ipswposs] << endl;
     cout << "BLOB: " << argv[blobposs] << endl;
     cout << "MODE: " << mode << endl;
     cout << "BOARD: " << argv[boardposs] << endl;
