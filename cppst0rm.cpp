@@ -437,11 +437,11 @@ int restore(string ipsw, string blob, string boardUpper, bool kpp, bool legacy, 
 
     cout << "{!} Restoring device\n";
     if(skipbb) {
-        string futurerestore_skipbb("cd ./work && ../Dependencies/futurerestore -t " + blob + " --use-pwndfu --skip-blob --rdsk ../work/ramdisk.im4p --rkrn ../work/krnl.im4p --latest-sep --skip-baseband " + ipsw);
+        string futurerestore_skipbb("./Dependencies/futurerestore -t " + blob + " --use-pwndfu --skip-blob --rdsk ./work/ramdisk.im4p --rkrn ./work/krnl.im4p --latest-sep --skip-baseband " + ipsw);
         const char *futurerestore_skipbb_cmd = futurerestore_skipbb.c_str();
         system(futurerestore_skipbb_cmd);
     } else {
-        string futurerestore("cd ./work && ../Dependencies/futurerestore -t " + blob + " --use-pwndfu --skip-blob --rdsk ../work/ramdisk.im4p --rkrn ../work/krnl.im4p --latest-sep --latest-baseband " + ipsw);
+        string futurerestore("./Dependencies/futurerestore -t " + blob + " --use-pwndfu --skip-blob --rdsk ./work/ramdisk.im4p --rkrn ./work/krnl.im4p --latest-sep --latest-baseband " + ipsw);
         const char *futurerestore_cmd = futurerestore.c_str();
         system(futurerestore_cmd);
     }
